@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="th">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="#090e18" name="theme-color"/>
+  <title>FRACTURED HORIZON — Prelude</title>
+  <link href="assets/style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <!-- หน้าขอเปิดเสียง: เริ่มเพลงเมื่อผู้เล่นคลิกเท่านั้น -->
+  <div class="sound-gate" id="soundGate" role="dialog" aria-modal="true" aria-labelledby="soundGateTitle" aria-describedby="soundGateDescription">
+    <div class="sound-gate-glow" aria-hidden="true"></div>
+    <section class="sound-gate-card">
+      <div class="sound-gate-kicker"><span class="sound-gate-dot"></span> VEYRA / SYSTEM INITIALIZATION</div>
+      <div class="sound-gate-symbol" aria-hidden="true">◈</div>
+      <p class="sound-gate-overline">AN INTERACTIVE PRELUDE</p>
+      <h1 id="soundGateTitle">FRACTURED<br>HORIZON</h1>
+      <p class="sound-gate-tagline">ก่อนเสียงสะท้อนแรกจะเริ่มต้น...</p>
+      <div class="sound-gate-rule"></div>
+      <p id="soundGateDescription" class="sound-gate-description">
+        เพื่อสัมผัสบรรยากาศของ Veyra อย่างเต็มที่<br>
+        <strong>แนะนำให้เปิดเสียงและใช้หูฟัง</strong> ระหว่างการสำรวจ
+      </p>
+      <button class="sound-gate-enter" id="soundGateEnter" type="button">♫ ยืนยัน เปิดเสียง และเข้าสู่เรื่องราว <span aria-hidden="true">↗</span></button>
+      <p id="soundGateStatus" class="sound-gate-status" role="status" aria-live="polite">การกดปุ่มจะเริ่มเพลงประกอบของเว็บไซต์</p>
+      <button class="sound-gate-skip" id="soundGateSkip" type="button" hidden>เข้าสู่เว็บไซต์โดยไม่มีเสียง</button>
+      <p class="sound-gate-footer">FRACTURED HORIZON · A TALE OF VEYRA</p>
+    </section>
+  </div>
+  <main class="app" id="app" inert>
+   <header class="top">
+    <div>
+     <div class="brand">
+      F R A C T U R E D &nbsp; H O R I Z O N
+     </div>
+     <div class="small">
+      A Tale of Veyra / Prelude
+     </div>
+    </div>
+    <nav class="topnav">
+     <a href="character-form.html">
+      แบบฟอร์ม Vestige
+     </a>
+     <a href="#" id="restartTop">
+      เริ่มใหม่ ↻
+     </a>
+     <div class="audio-controls" aria-label="เพลงพื้นหลัง">
+      <button type="button" id="audioToggle" class="audio-button" aria-pressed="false">♫ เปิดเพลง</button>
+      <label class="volume-label" for="audioVolume">เสียง</label>
+      <input type="range" id="audioVolume" min="0" max="100" value="45" aria-label="ระดับเสียงเพลง" />
+     </div>
+    </nav>
+   </header>
+   <div aria-live="polite" class="stage" id="stage">
+    <div aria-hidden="true" class="scene-background" id="sceneBackground"></div>
+    <!-- Atmospheric layers: เคลื่อนไหวตามฉาก ไม่ขัดขวางการคลิก -->
+    <div aria-hidden="true" class="scene-atmosphere">
+     <div class="light-sweep"></div>
+     <div class="floating-motes"></div>
+     <div class="cinematic-haze"></div>
+     <div class="scene-scanlines"></div>
+    </div>
+    <div aria-hidden="true" class="scene-transition" id="sceneTransition"></div>
+    <div aria-hidden="true" class="visual">
+     <div class="orb">
+     </div>
+     <div class="ruins">
+     </div>
+     <div class="fog">
+     </div>
+    </div>
+    <section class="content" id="content">
+    </section>
+    <div class="exploration-trail" id="trail" aria-live="polite"></div>
+    <div class="progress" id="progress">
+    </div>
+   </div>
+  </main>
+  <!-- วางไฟล์เพลงของคุณแทน bgm.mp3 ใน assets/audio/ -->
+  <audio id="backgroundAudio" loop preload="auto" src="assets/audio/bgm.mp3"></audio>
+  <script src="assets/audio.js"></script>
+  <script src="assets/story.js">
+  </script>
+ </body>
+</html>
+

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="th">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="#090e18" name="theme-color"/>
+  <title>
+   Vestige — Character Concept | VEYRA
+  </title>
+  <link href="assets/style.css" rel="stylesheet"/>
+ </head>
+ <body class="form-page">
+  <!-- Authorization gateway: decorative loading sequence before the sheet -->
+  <div class="auth-gate" id="authGate" role="dialog" aria-label="กำลังตรวจสอบสิทธิ์" aria-modal="true">
+   <div class="auth-panel">
+    <div class="auth-icon" aria-hidden="true">◇</div>
+    <div class="auth-kicker">VEYRA / VESTIGE REGISTRY</div>
+    <h1 class="auth-headline" id="authHeadline">AUTHORIZATION IN PROGRESS</h1>
+    <p class="auth-message" id="authMessage">กำลังเชื่อมต่อข้อมูลผู้เดินทาง...</p>
+    <div class="auth-progress" aria-hidden="true"><span></span></div>
+    <button type="button" class="audio-button auth-continue" id="authContinue">เข้าสู่แบบฟอร์ม ↗</button>
+    <button type="button" class="auth-skip" id="authSkip">ข้ามอนิเมชัน</button>
+   </div>
+  </div>
+  <div class="form-ambient" aria-hidden="true"><div class="form-aurora"></div><div class="form-gridlines"></div></div>
+  <div class="app">
+   <header class="top">
+    <div>
+     <div class="brand">
+      V E Y R A
+     </div>
+     <div class="small">
+      Vestige / Concept Sheet
+     </div>
+    </div>
+    <nav class="topnav">
+     <div class="audio-controls" aria-label="เพลงประกอบหน้าแบบฟอร์ม">
+      <button type="button" class="audio-button" id="audioToggle" aria-pressed="false">♫ เปิดเพลง</button>
+      <label class="volume-label" for="audioVolume">เสียง</label>
+      <input id="audioVolume" type="range" min="0" max="100" value="40" aria-label="ระดับเสียงเพลง" />
+     </div>
+     <a href="index.html">
+      ← กลับไปบทนำ
+     </a>
+    </nav>
+   </header>
+   <main class="formwrap">
+    <div class="eyebrow">
+     BEFORE THE AWAKENING
+    </div>
+    <h1 class="formtitle">
+     VESTIGE // แนวคิดตัวละคร
+    </h1>
+    <p class="formlead">
+     แบบฟอร์มนี้ไม่ใช่ Character Sheet ฉบับระบบต่อสู้ ใช้สำหรับให้ผู้เล่นกำหนดตัวตน
+     <strong>
+      ในปัจจุบัน
+     </strong>
+     ก่อนเริ่มแคมเปญ ผู้เล่นเลือกแนวทางสกิลและพลังได้เอง 
+    </p>
+    <div class="tag">
+     FREEFORM CHARACTER
+    </div>
+    <div class="tag">
+     NO CLASS RESTRICTION
+    </div>
+    <div class="tag">
+     PAST UNKNOWN
+    </div>
+    <form class="panel" id="sheet">
+     <div class="formgrid">
+      <div class="field">
+       <label for="player">
+        ชื่อผู้เล่น
+       </label>
+       <input id="player" name="player" placeholder="ชื่อที่ใช้ติดต่อ GM"/>
+      </div>
+      <div class="field">
+       <label for="name">
+        ชื่อที่ใช้เรียกตัวละครตอนนี้
+        <small>
+         จะตั้งชื่อใหม่หรือใช้รหัสเรียกแทนก็ได้
+        </small>
+       </label>
+       <input id="name" name="name" placeholder="เช่น Ash, V-07, ไม่มีชื่อ"/>
+      </div>
+      <div class="field">
+       <label for="pronoun">
+        สรรพนาม / วิธีเรียก
+       </label>
+       <input id="pronoun" name="pronoun" placeholder="ตามที่ต้องการ"/>
+      </div>
+      <div class="field">
+       <label for="look">
+        รูปลักษณ์โดยย่อ
+       </label>
+       <input id="look" name="look" placeholder="ภาพรวม รูปแบบการแต่งกาย จุดสังเกต"/>
+      </div>
+      <div class="field full">
+       <label for="personality">
+        นิสัยและท่าทีต่อโลกใบนี้
+        <small>
+         คุณเป็นคนแบบไหนเมื่อต้องเผชิญสถานที่ที่ไม่รู้จัก?
+        </small>
+       </label>
+       <textarea id="personality" name="personality"></textarea>
+      </div>
+      <div class="field">
+       <label for="combat">
+        อาวุธ / รูปแบบการต่อสู้ที่อยากเล่น
+       </label>
+       <textarea id="combat" name="combat" placeholder="อาวุธปืน อาวุธระยะประชิด การสนับสนุน อุปกรณ์ ฯลฯ"></textarea>
+      </div>
+      <div class="field">
+       <label for="abilities">
+        แนวคิดสกิลหรือพลังเริ่มต้น
+        <small>
+         อธิบายสิ่งที่อยากทำได้ ไม่ต้องใส่ค่าดาเมจ
+        </small>
+       </label>
+       <textarea id="abilities" name="abilities" placeholder="เช่น ใช้คลื่นพลังตรวจจับสิ่งผิดปกติ"></textarea>
+      </div>
+      <div class="field full">
+       <label for="fragment">
+        เศษความทรงจำหนึ่งอย่าง (ไม่บังคับ)
+        <small>
+         เสียง กลิ่น ภาพ หรือความรู้สึกที่ยังติดอยู่ในหัว — GM อาจนำไปต่อยอด
+        </small>
+       </label>
+       <textarea id="fragment" name="fragment" placeholder="เว้นว่างเพื่อให้ GM เป็นผู้สร้างก็ได้"></textarea>
+      </div>
+      <div class="field full">
+       <label for="goal">
+        เป้าหมายแรกหลังตื่นขึ้น
+        <small>
+         เช่น ตามหาคำตอบ ช่วยเหลือผู้อื่น หาที่ปลอดภัย หรือออกสำรวจ
+        </small>
+       </label>
+       <textarea id="goal" name="goal"></textarea>
+      </div>
+      <div class="field full">
+       <label for="boundaries">
+        เรื่องที่ไม่อยากให้เกิดกับตัวละคร 
+        <small>
+         
+        </small>
+       </label>
+       <textarea id="boundaries" name="boundaries" placeholder="ไม่จำเป็นต้องกรอกหากยังไม่สะดวก"></textarea>
+      </div>
+     </div>
+     <p class="hint">
+      หมายเหตุ: ไม่มีการบังคับเลือก Class หรือ Race แบบ D&amp;D เดิม • GM ไม่ควรใช้ช่องขอบเขตเนื้อเรื่องเป็นเนื้อเรื่องเปิดเผยต่อผู้เล่นคนอื่น
+     </p>
+     <div class="actions">
+      <button class="btn" id="save" type="button">
+       ดาวน์โหลดข้อมูล (.json)
+      </button>
+      <button class="btn secondary" id="copy" type="button">
+       คัดลอกเป็นข้อความ
+      </button>
+      <button class="btn secondary" id="print" type="button">
+       พิมพ์ / บันทึก PDF
+      </button>
+      <button class="btn secondary" type="reset">
+       ล้างข้อมูล
+      </button>
+     </div>
+     <p class="notice" id="status" role="status">
+      ข้อมูลจะถูกบันทึกอัตโนมัติในเบราว์เซอร์ของเครื่องนี้เท่านั้น และจะไม่ถูกส่งขึ้นเซิร์ฟเวอร์
+     </p>
+    </form>
+    <p class="footer">
+     VEYRA • Vestige Concept Sheet v0.1 • ผู้เล่นเป็นเจ้าของตัวละครปัจจุบัน 
+    </p>
+   </main>
+  </div>
+  <!-- เพลงเฉพาะ Character Form เปลี่ยนได้ที่ assets/audio/form.mp3 -->
+  <audio id="backgroundAudio" autoplay loop preload="auto" src="assets/audio/form.mp3"></audio>
+  <script src="assets/audio.js"></script>
+  <script src="assets/authorization.js"></script>
+  <script src="assets/form.js">
+  </script>
+ </body>
+</html>
+

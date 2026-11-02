@@ -66,3 +66,13 @@ Authorization เป็นแอนิเมชันในเรื่อง �
 - เสียงที่แปลกประหลาดใน Aftertrace Zones คือ **เศษซากของเสียงที่ผิดเพี้ยนซึ่งหลงเหลือจากภัยพิบัติ**
 - แก้เนื้อหาใน `assets/story.js` ให้สอดคล้องกัน โดยรักษาโครงสร้าง 35 ฉาก ตัวเลือก ภาพ อนิเมชัน Sound Gate เพลง และ Character Form เหมือนเดิม
 - เพิ่ม `LORE_PLAYER.md` ซึ่งส่งให้ผู้เล่นอ่านได้โดยไม่เฉลยเรื่องหลัก
+
+
+## v1.1 — Discord Concept Submission
+- เพิ่ม opt-in สำหรับส่ง Concept Sheet ไปยัง Discord ของ GM เมื่อกดหนึ่งในสามปุ่มบันทึก
+- Backend ตัวอย่าง Cloudflare Worker; **ยังไม่ทำงานจริงจนกว่า GM ตั้งค่า Webhook Secret + Worker URL**
+- โปรดอ่าน `DISCORD_SETUP_TH.md` และ `PLAYER_WEBSITE_GUIDE_TH.md`
+
+
+## เชื่อมต่อ Discord ล่าสุด (v1.2)
+อ่าน `NEXT_STEPS_TH.md` ก่อนตั้งค่า และเปลี่ยน Webhook ที่เคยแชร์แล้วเสมอ

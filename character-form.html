@@ -56,7 +56,7 @@
      <strong>
       ในปัจจุบัน
      </strong>
-     ก่อนเริ่มแคมเปญ ผู้เล่นเลือกแนวทางสกิลและพลังได้เอง 
+     ก่อนเริ่มแคมเปญ ผู้เล่นเลือกแนวทางสกิลและพลังได้เอง ส่วนอดีตที่ขาดหายจะค่อย ๆ เปิดเผยผ่านการเล่น
     </p>
     <div class="tag">
      FREEFORM CHARACTER
@@ -140,9 +140,9 @@
       </div>
       <div class="field full">
        <label for="boundaries">
-        เรื่องที่ไม่อยากให้เกิดกับตัวละคร 
+        ขอบเขตเนื้อเรื่อง / เรื่องที่ไม่อยากให้เกิดกับตัวละคร (ส่งให้ GM เป็นการส่วนตัว)
         <small>
-         
+         ระบุเรื่องที่ไม่ต้องการให้ GM ใช้กับอดีตของตัวละคร
         </small>
        </label>
        <textarea id="boundaries" name="boundaries" placeholder="ไม่จำเป็นต้องกรอกหากยังไม่สะดวก"></textarea>
@@ -151,6 +151,13 @@
      <p class="hint">
       หมายเหตุ: ไม่มีการบังคับเลือก Class หรือ Race แบบ D&amp;D เดิม • GM ไม่ควรใช้ช่องขอบเขตเนื้อเรื่องเป็นเนื้อเรื่องเปิดเผยต่อผู้เล่นคนอื่น
      </p>
+     <div class="discord-consent" style="margin:1rem 0;padding:1rem;border:1px solid #56616d;border-radius:10px;">
+      <label style="display:flex;gap:.65rem;align-items:flex-start;cursor:pointer;">
+       <input id="discordConsent" type="checkbox" style="margin-top:.3rem;"/>
+       <span>ฉันยินยอมให้ส่งข้อมูล Concept Sheet (ยกเว้นช่องขอบเขตเนื้อเรื่องส่วนตัว) ให้ GM ผ่าน Discord เมื่อกดปุ่มบันทึกด้านล่าง</span>
+      </label>
+      <p class="hint">ระบบจะส่งเฉพาะเมื่อคุณติ๊กยินยอมและ GM ตั้งค่า Discord Endpoint แล้ว การดาวน์โหลด/คัดลอก/พิมพ์ยังใช้ได้แม้ไม่ส่งข้อมูล</p>
+     </div>
      <div class="actions">
       <button class="btn" id="save" type="button">
        ดาวน์โหลดข้อมูล (.json)
@@ -166,18 +173,19 @@
       </button>
      </div>
      <p class="notice" id="status" role="status">
-      ข้อมูลจะถูกบันทึกอัตโนมัติในเบราว์เซอร์ของเครื่องนี้เท่านั้น และจะไม่ถูกส่งขึ้นเซิร์ฟเวอร์
+      ข้อมูลจะถูกบันทึกในเบราว์เซอร์โดยอัตโนมัติ และจะส่งให้ GM เฉพาะเมื่อคุณกดยินยอมและกดปุ่มบันทึก
      </p>
     </form>
     <p class="footer">
-     VEYRA • Vestige Concept Sheet v0.1 • ผู้เล่นเป็นเจ้าของตัวละครปัจจุบัน 
+     VEYRA • Vestige Concept Sheet v0.1 • ผู้เล่นเป็นเจ้าของตัวละครปัจจุบัน / GM เป็นผู้ดูแลปริศนาของอดีต
     </p>
    </main>
   </div>
   <!-- เพลงเฉพาะ Character Form เปลี่ยนได้ที่ assets/audio/form.mp3 -->
-  <audio id="backgroundAudio" autoplay loop preload="auto" src="assets/audio/form.MP3"></audio>
+  <audio id="backgroundAudio" autoplay loop preload="auto" src="assets/audio/form.mp3"></audio>
   <script src="assets/audio.js"></script>
   <script src="assets/authorization.js"></script>
+  <script src="assets/discord-config.js"></script>
   <script src="assets/form.js">
   </script>
  </body>

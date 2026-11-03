@@ -766,3 +766,27 @@ input:focus, textarea:focus, select:focus { border-color:#9fe1e6; }
 @keyframes sound-gate-breathe {50% {transform:scale(1.035);opacity:.65;}}
 @media(max-width:540px){.sound-gate-card{padding:16px 5px;}.sound-gate-description{font-size:13px;}.sound-gate-card h1{letter-spacing:.05em;}}
 @media(prefers-reduced-motion:reduce){.sound-gate-glow,.sound-gate-dot{animation:none!important;}.sound-gate{transition:none!important;}}
+
+/* =============== FH v1.3: PLAYER GUIDES + PDF =============== */
+.player-guide{position:relative;z-index:3;margin:16px 0 24px;border:1px solid rgba(159,225,230,.3);border-radius:13px;background:rgba(9,12,16,.91);color:#e8edf0;box-shadow:0 10px 30px rgba(0,0,0,.28)}
+.player-guide summary{cursor:pointer;padding:14px 18px;font-weight:700;letter-spacing:.01em;list-style-position:inside}
+.guide-inner{padding:0 18px 16px;color:#c0cbd0;line-height:1.8;font-size:14px}
+.guide-inner p{margin:8px 0}.guide-inner ol{padding-left:22px;margin:7px 0}.guide-inner li{margin-bottom:5px}
+.form-guide{max-width:940px}
+.story-guide{margin:18px 0 14px;max-width:770px}
+.guide-label{font-size:11px;color:#9fe1e6;letter-spacing:.12em}
+.form-actions>.btn{max-width:460px;width:100%;font-size:15px;min-height:52px}
+.pdf-sheet{display:none}
+@media print{
+  @page{size:A4;margin:16mm}
+  html,body{background:white!important;color:#111!important;overflow:visible!important}
+  body>*:not(.pdf-sheet){display:none!important}
+  .pdf-sheet{display:block!important;position:static!important;color:#111!important;background:white!important;font-family:Arial,'Noto Sans Thai',sans-serif;font-size:11pt;line-height:1.55}
+  .pdf-kicker{font-size:10pt;letter-spacing:.14em;color:#555}
+  .pdf-sheet h1{font-size:19pt;line-height:1.25;margin:10px 0 4px;color:#111}
+  .pdf-subtitle{color:#666;border-bottom:1px solid #888;padding-bottom:12px}
+  .pdf-field{break-inside:avoid;page-break-inside:avoid;margin:10px 0 13px;padding:0 0 8px;border-bottom:1px solid #ddd}
+  .pdf-field h2{font-size:10pt;font-weight:700;margin:0 0 4px;color:#333}
+  .pdf-field p{white-space:pre-wrap;overflow-wrap:anywhere;margin:0;font-size:11pt}
+  .pdf-footer{margin-top:18px;color:#666;font-size:9pt}
+}

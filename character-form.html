@@ -5,7 +5,7 @@
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="#090e18" name="theme-color"/>
   <title>
-   Vestige — Character Concept | VEYRA
+   Vestige — Character Concept | FRACTURED HORIZON
   </title>
   <link href="assets/style.css" rel="stylesheet"/>
  </head>
@@ -56,7 +56,7 @@
      <strong>
       ในปัจจุบัน
      </strong>
-     ก่อนเริ่มแคมเปญ ผู้เล่นเลือกแนวทางสกิลและพลังได้เอง ส่วนอดีตที่ขาดหายจะค่อย ๆ เปิดเผยผ่านการเล่น
+     ก่อนเริ่มแคมเปญ ผู้เล่นเลือกแนวทางสกิลและพลังได้เอง
     </p>
     <div class="tag">
      FREEFORM CHARACTER
@@ -67,6 +67,20 @@
     <div class="tag">
      PAST UNKNOWN
     </div>
+    <details class="player-guide form-guide" open>
+      <summary>📖 วิธีกรอก Concept Sheet — อ่านก่อนเริ่ม</summary>
+      <div class="guide-inner">
+        <p>ลองนึกก่อนว่าถ้าตื่นขึ้นมาใน Veyra โดยจำเรื่องราวของตัวเองไม่ได้ คุณอยากให้ตัวละครเป็นคนแบบไหน</p>
+        <ol>
+          <li>กรอกชื่อผู้เล่นและชื่อที่ใช้เรียกตัวละครในตอนนี้</li>
+          <li>เล่ารูปลักษณ์ บุคลิก อาวุธ และพลังที่อยากเล่น //ขอบเขตพลังได้ไม่จำกัดจะถูกปรับเปลี่ยนตามความเหมาะสมของเนื้อเรื่อง ณ ตอนนั้น</li>
+          <li>ตัวละครหากมีภาพประกอบจะดีมากเลย //แนบมาที่ Discord impharin ได้เลย</li>
+          <li>ถ้านึกเศษความทรงจำไม่ออก ข้ามไปได้เลย GM จะช่วยต่อยอด</li>
+          <li>อ่านและกดยินยอมส่งข้อมูล จากนั้นกดปุ่มเดียวเพื่อเปิดหน้าบันทึก PDF และส่งข้อมูลให้ GM</li>
+        </ol>
+        <p>บันทึก PDF: ในหน้าต่างพิมพ์ให้เลือก <strong>Save as PDF / บันทึกเป็น PDF</strong> แล้วเลือกโฟลเดอร์ที่ต้องการ</p>
+      </div>
+    </details>
     <form class="panel" id="sheet">
      <div class="formgrid">
       <div class="field">
@@ -124,7 +138,7 @@
        <label for="fragment">
         เศษความทรงจำหนึ่งอย่าง (ไม่บังคับ)
         <small>
-         เสียง กลิ่น ภาพ หรือความรู้สึกที่ยังติดอยู่ในหัว — GM อาจนำไปต่อยอด
+         เสียง กลิ่น ภาพ หรือความรู้สึกที่ยังติดอยู่ในหัว 
         </small>
        </label>
        <textarea id="fragment" name="fragment" placeholder="เว้นว่างเพื่อให้ GM เป็นผู้สร้างก็ได้"></textarea>
@@ -149,35 +163,25 @@
       </div>
      </div>
      <p class="hint">
-      หมายเหตุ: ไม่มีการบังคับเลือก Class หรือ Race แบบ D&amp;D เดิม • GM ไม่ควรใช้ช่องขอบเขตเนื้อเรื่องเป็นเนื้อเรื่องเปิดเผยต่อผู้เล่นคนอื่น
+      หมายเหตุ: ไม่มีการบังคับเลือก Class หรือ Race แบบ D&amp;D เดิม 
      </p>
      <div class="discord-consent" style="margin:1rem 0;padding:1rem;border:1px solid #56616d;border-radius:10px;">
       <label style="display:flex;gap:.65rem;align-items:flex-start;cursor:pointer;">
        <input id="discordConsent" type="checkbox" style="margin-top:.3rem;"/>
        <span>ฉันยินยอมให้ส่งข้อมูล Concept Sheet (ยกเว้นช่องขอบเขตเนื้อเรื่องส่วนตัว) ให้ GM ผ่าน Discord เมื่อกดปุ่มบันทึกด้านล่าง</span>
       </label>
-      <p class="hint">ระบบจะส่งเฉพาะเมื่อคุณติ๊กยินยอมและ GM ตั้งค่า Discord Endpoint แล้ว การดาวน์โหลด/คัดลอก/พิมพ์ยังใช้ได้แม้ไม่ส่งข้อมูล</p>
+      <p class="hint">ข้อมูลที่ส่งให้ GM จะไม่รวมช่องขอบเขตเนื้อเรื่องส่วนตัว PDF ยังคงบันทึกได้แม้ไม่ให้ความยินยอม</p>
      </div>
-     <div class="actions">
-      <button class="btn" id="save" type="button">
-       ดาวน์โหลดข้อมูล (.json)
-      </button>
-      <button class="btn secondary" id="copy" type="button">
-       คัดลอกเป็นข้อความ
-      </button>
-      <button class="btn secondary" id="print" type="button">
-       พิมพ์ / บันทึก PDF
-      </button>
-      <button class="btn secondary" type="reset">
-       ล้างข้อมูล
-      </button>
+     <div class="actions form-actions">
+      <button class="btn" id="savePdfSend" type="button">📄 บันทึก PDF และส่งข้อมูลให้ GM</button>
      </div>
+     <p class="hint">การกดปุ่มจะเปิดหน้าพิมพ์สำหรับบันทึก PDF และส่งข้อมูลเข้า Discord หากคุณติ๊กยินยอมไว้ (ไม่รวมขอบเขตเนื้อเรื่องส่วนตัว)</p>
      <p class="notice" id="status" role="status">
-      ข้อมูลจะถูกบันทึกในเบราว์เซอร์โดยอัตโนมัติ และจะส่งให้ GM เฉพาะเมื่อคุณกดยินยอมและกดปุ่มบันทึก
+      แบบฟอร์มบันทึกอัตโนมัติในเบราว์เซอร์ เมื่อพร้อมแล้วกดปุ่มด้านบนเพื่อเซฟเป็น PDF
      </p>
     </form>
     <p class="footer">
-     VEYRA • Vestige Concept Sheet v0.1 • ผู้เล่นเป็นเจ้าของตัวละครปัจจุบัน / GM เป็นผู้ดูแลปริศนาของอดีต
+     VEYRA • Vestige Concept Sheet v1.3 • ผู้เล่นเป็นเจ้าของตัวละครปัจจุบัน 
     </p>
    </main>
   </div>
@@ -186,6 +190,7 @@
   <script src="assets/audio.js"></script>
   <script src="assets/authorization.js"></script>
   <script src="assets/discord-config.js"></script>
+  <section id="pdfSheet" class="pdf-sheet" aria-hidden="true"></section>
   <script src="assets/form.js">
   </script>
  </body>

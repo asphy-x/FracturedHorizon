@@ -25,7 +25,7 @@ try {
 
 form.addEventListener('input', () => {
   try { localStorage.setItem(key, JSON.stringify(data())); }
-  catch (_) { status.textContent = 'ไม่สามารถบันทึกอัตโนมัติได้ กรุณาดาวน์โหลดไฟล์แทน'; }
+  catch (_) { status.textContent = 'ไม่สามารถบันทึกอัตโนมัติได้ กรุณาใช้ปุ่มบันทึก PDF'; }
 });
 form.addEventListener('reset', () => {
   localStorage.removeItem(key);
@@ -33,68 +33,72 @@ form.addEventListener('reset', () => {
   status.textContent = 'ล้างข้อมูลแล้ว';
 });
 
-async function sendToGM(action) {
+// ส่งเฉพาะช่องข้อมูลทั่วไปเท่านั้น ไม่ส่งขอบเขตส่วนตัว
+async function sendToGM() {
   if (!consent.checked) {
-    status.textContent = 'บันทึกบนเครื่องสำเร็จ — ไม่ส่ง Discord เพราะยังไม่ได้ให้ความยินยอม';
-    return;
+    return { sent: false, message: 'ไม่ได้ส่ง Discord เนื่องจากยังไม่ติ๊กยินยอม (PDF ยังบันทึกได้ตามปกติ)' };
   }
   const endpoint = window.VEYRA_DISCORD_ENDPOINT || '';
   if (!endpoint || endpoint.includes('YOUR-WORKER')) {
-    status.textContent = 'บันทึกบนเครื่องสำเร็จ — GM ยังไม่ได้ตั้งค่า Discord Endpoint';
-    return;
+    return { sent: false, message: 'ยังไม่ได้ตั้งค่า Worker URL — โปรดแจ้ง GM' };
   }
-  // หลีกเลี่ยงการส่ง boundaries ที่อาจเป็นข้อมูลอ่อนไหวไป Discord
   const { boundaries, ...shareable } = data();
-  status.textContent = 'กำลังส่ง Concept Sheet ให้ GM ทาง Discord...';
   try {
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...shareable, sourceAction: action }),
+      body: JSON.stringify({ ...shareable, sourceAction: 'save-pdf' }),
       mode: 'cors'
     });
     if (!response.ok) throw new Error('HTTP ' + response.status);
-    status.textContent = 'บันทึกสำเร็จ และส่ง Concept Sheet ให้ GM ทาง Discord แล้ว ✓';
+    return { sent: true, message: 'ส่ง Concept Sheet เข้า Discord สำเร็จ ✓' };
   } catch (error) {
-    status.textContent = 'บันทึกบนเครื่องสำเร็จ แต่ส่ง Discord ไม่สำเร็จ — โปรดแจ้ง GM หรือส่งไฟล์ JSON ให้แทน';
     console.warn('Discord submission error:', error);
+    return { sent: false, message: 'ส่ง Discord ไม่สำเร็จ โปรดลองอีกครั้งหรือติดต่อ GM (PDF ยังคงบันทึกได้)' };
   }
 }
 
-function downloadJSON() {
-  const payload = { project: 'FRACTURED HORIZON', type: 'Vestige Character Concept', version: '1.1', ...data() };
-  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const anchor = document.createElement('a');
-  anchor.href = url;
-  anchor.download = 'Vestige_' + (payload.name || 'Concept').replace(/[^\p{L}\p{N}_-]/gu, '_') + '.json';
-  anchor.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
+// ใช้ CSS @media print และหน้าต่างพิมพ์ของเบราว์เซอร์ รองรับภาษาไทย
+// หมายเหตุ: เบราว์เซอร์ไม่อนุญาตให้เว็บบังคับเซฟไฟล์โดยข้าม Print Dialog
+const printable = document.getElementById('pdfSheet');
+function textNode(tag, value, className = '') {
+  const el = document.createElement(tag);
+  if (className) el.className = className;
+  el.textContent = value;
+  return el;
+}
+function buildPrintSheet() {
+  printable.replaceChildren();
+  printable.append(textNode('div', 'FRACTURED HORIZON / VEYRA', 'pdf-kicker'));
+  printable.append(textNode('h1', 'VESTIGE — CHARACTER CONCEPT'));
+  printable.append(textNode('p', 'แนวคิดตัวละครก่อนเริ่มแคมเปญ • ข้อมูลที่กรอกโดยผู้เล่น', 'pdf-subtitle'));
+  const values = data();
+  Object.entries(labels).forEach(([field, label]) => {
+    const section = document.createElement('section');
+    section.className = 'pdf-field';
+    section.append(textNode('h2', label));
+    section.append(textNode('p', values[field] || '—'));
+    printable.append(section);
+  });
+  printable.append(textNode('p', 'FRACTURED HORIZON • A TALE OF VEYRA', 'pdf-footer'));
 }
 
-document.getElementById('save').addEventListener('click', () => {
-  downloadJSON();
-  void sendToGM('download-json');
-});
-
-document.getElementById('copy').addEventListener('click', async () => {
-  const value = 'FRACTURED HORIZON — VESTIGE CONCEPT\n\n' +
-    Object.entries(data()).map(([field, text]) => `${labels[field] || field}:\n${text || 'ไม่ระบุ'}`).join('\n\n');
-  try {
-    await navigator.clipboard.writeText(value);
-  } catch (_) {
-    const box = document.createElement('textarea');
-    box.value = value;
-    document.body.append(box);
-    box.select();
-    document.execCommand('copy');
-    box.remove();
-  }
-  status.textContent = 'คัดลอกข้อมูลแล้ว';
-  void sendToGM('copy-text');
-});
-
-document.getElementById('print').addEventListener('click', () => {
+const saveButton = document.getElementById('savePdfSend');
+let submitting = false;
+saveButton.addEventListener('click', () => {
+  if (submitting) return;
+  buildPrintSheet();
+  // เปิด Print Dialog ทันทีจากการคลิก เพื่อให้เบราว์เซอร์ไม่บล็อก
+  // ผู้เล่นเลือกปลายทาง Save as PDF และกด Save เอง
+  status.textContent = 'เลือก Save as PDF / บันทึกเป็น PDF ในหน้าต่างที่เปิดขึ้น';
   window.print();
-  void sendToGM('print-pdf');
+  if (consent.checked) {
+    submitting = true;
+    saveButton.disabled = true;
+    status.textContent = 'กำลังส่งข้อมูลให้ GM ทาง Discord...';
+    void sendToGM().then(result => { status.textContent = result.message; })
+      .finally(() => { submitting = false; saveButton.disabled = false; });
+  } else {
+    status.textContent = 'เปิดหน้าบันทึก PDF แล้ว — ไม่ได้ส่ง Discord เพราะยังไม่ติ๊กยินยอม';
+  }
 });
